@@ -1,7 +1,28 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import './Header.css'
+import './Header.css';
 
+import {markCOmpleted, clearCompleted, showAll, showActive, showCompleted} from '../../redux/action/todo'
+
+const handleMarkCompleted = ()=>{
+
+}
+
+const handleClearCompleted = (props)=>{
+    props.dispatch(clearCompleted());
+}
+
+const handleSHowAll = ()=>{
+
+}
+
+const handleSHowActive = ()=>{
+    
+}
+
+const handleSHowCompleted = ()=>{
+    
+}
 const Header = (props)=>{
     return (
         <div className = "header">
@@ -14,7 +35,7 @@ const Header = (props)=>{
                 <button>COMPLETED</button>
             </div>
             <div className = "clear">
-                <button>CLEAR COMPLETED</button>
+                <button onClick = {()=>{handleClearCompleted(props)}}>CLEAR COMPLETED</button>
             </div>
             <div className = "mark">
                 <button>MARK COMPLETED</button>
