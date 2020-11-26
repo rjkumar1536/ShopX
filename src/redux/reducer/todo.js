@@ -15,10 +15,11 @@ const todos = (state = initialState, action) => {
             return {...state, data : [...todo]}
         case  'MARK_COMPLETED' :
             let todos = state.data.slice();
-            for(let id in action.id){
-                let item = todos.find((todo)=> todo.id == id)
-                if(todos.state == 'active'){
-                    todos.state = 'complete';
+            for(let id of action.id){
+                let item = todos.find((todo)=> todo.id == id && todo.state == "active");
+                if(item){
+                    item.state = 'complete';
+                    console.log('hello')
                 }
             }
             return {...state, data: [...todos]}

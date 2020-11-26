@@ -2,10 +2,21 @@ import React from 'react';
 import {connect} from 'react-redux'
 import './Header.css';
 
-import {markCOmpleted, clearCompleted, showAll, showActive, showCompleted} from '../../redux/action/todo'
+import {markCompleted, clearCompleted, showAll, showActive, showCompleted} from '../../redux/action/todo'
 
-const handleMarkCompleted = ()=>{
+const handleMarkCompleted = (props)=>{
+   const items =  document.querySelectorAll('.listItem');
 
+   const ids = []
+   for(let item of items ){
+       let checkbox =  item.querySelector('.listItemCheckBox');
+       let tag = item.querySelector('.listItemTag');
+       if(checkbox.checked){
+        ids.push(tag.id);
+       }
+   }
+
+   props.dispatch(markCompleted(ids))
 }
 
 const handleClearCompleted = (props)=>{
@@ -30,15 +41,15 @@ const Header = (props)=>{
                 <p>{props.count} items remaining</p>
             </div>
             <div className = "filter">
-                <button>ALL</button>
-                <button>ACTIVE</button>
-                <button>COMPLETED</button>
+                <button onClick = {()=>{handleSHowAll(props)}}>ALL</button>
+                <button onClick = {()=>{handleSHowActive(props)}}>ACTIVE</button>
+                <button onClick = {()=>{handleSHowCompleted(props)}}>COMPLETED</button>
             </div>
             <div className = "clear">
                 <button onClick = {()=>{handleClearCompleted(props)}}>CLEAR COMPLETED</button>
             </div>
             <div className = "mark">
-                <button>MARK COMPLETED</button>
+                <button onClick = {()=>{handleMarkCompleted(props)}}>MARK COMPLETED</button>
             </div>
         </div>
     )
